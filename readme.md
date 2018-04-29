@@ -1,4 +1,4 @@
 # What
 
-Nobypy: Not Brain by Python
+Nobypy: No Brain by Python
 
