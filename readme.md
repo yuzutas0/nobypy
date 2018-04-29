@@ -6,6 +6,12 @@ Nobypy: No Brain by Python
 
 - https://www.amazon.co.jp/dp/4839917299
 
+# Dictionaries
+
+Download from
+
+- https://book.mynavi.jp/support/pc/5346/
+
 # Images
 
 - https://www.irasutoya.com/2015/05/ai.html

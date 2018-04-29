@@ -411,3 +411,8 @@ tags
 
 
 # End of https://www.gitignore.io/api/osx,vim,macos,python,pycharm,intellij,pycharm+all,pycharm+iml,intellij+all,intellij+iml,jupyternotebook
+
+# Custom
+
+KOISURU_PROGRAM/*
+
