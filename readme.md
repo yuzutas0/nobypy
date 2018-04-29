@@ -8,9 +8,8 @@ Nobypy: No Brain by Python
 
 # Dictionaries
 
-Download from
-
-- https://book.mynavi.jp/support/pc/5346/
+- Download from https://book.mynavi.jp/support/pc/5346/
+- Direct Link is https://book.mynavi.jp/support/pc/5346/KOISURU_PROGRAM.zip
 
 # Images
 
