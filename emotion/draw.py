@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from unmo import Unmo
-from IPython.display import Image, display_png, clear_output
+from IPython.display import display, clear_output
+from PIL import Image
 import os
 import random
 from datetime import datetime
 
 
 noby = Unmo('noby')
-img_dir = '../images'
-files = os.listdir(img_dir)
+img_dir = '../KOISURU_PROGRAM/sample/emotion/bmps'
 text = '*******************************************************'
 log = []
 
@@ -27,8 +27,8 @@ def initialize():
 
 def draw_image():
     clear_output(wait=True)
-    image_file = img_dir + '/' + random.choice(files)
-    display_png(Image(image_file))
+    image_file = img_dir + '/normal/0000.bmp'
+    display(Image.open(image_file))
 
 def draw_text():
     tmp = []
