@@ -3,7 +3,11 @@
 import random
 from numpy.random import *
 from responder import WhatResponder, RandomResponder, PatternResponder
+import re
+from dictionary import Dictionary
 
+
+dictionary = Dictionary()
 
 class Unmo:
     def __init__(self, name):
@@ -24,3 +28,30 @@ class Unmo:
         else:
             self.responder = self.responders[1]
         return self.responder.response(input_text)
+
+
+class Emotion:
+    mood_min = -15
+    mood_max = 15
+    mood_recovery = 0.5
+    
+    def __init__(self):
+        self.mood = 0
+    
+    def adjust_mood(self, value):
+        self.mood += value
+        if self.mood > mood_max:
+            self.mood = mood_max
+        elif self.mood < mood_min:
+            self.mood = mood_min
+    
+    def update(self, input_text):
+        for item in dictionary.pattern:
+            if re.search(item, input_text):
+                adjust_mood(item.modify)
+                break
+        
+        if self.mood < 0:
+            self.mood += mood_recovery
+        elif self.mood > 0:
+            self.mood -= mood_recovery
