@@ -37,15 +37,13 @@ def draw_text():
     for raw in reversed(tmp):
         print(raw)
 
-def display():
-    draw_image()
-    draw_text()
-
 def shutdown():
     log.append(text)
     log.append(now() + 'shutdown')
     log.append(text)    
-    display()
+    draw_image()
+    for raw in reversed(log):
+        print(raw)
     log.clear()
 
 def logger(input_text):
@@ -58,7 +56,8 @@ def logger(input_text):
 def start():
     initialize()
     while True:
-        display()
+        draw_image()
+        draw_text()
         input_text = input().rstrip()
         if not logger(input_text):
             break
