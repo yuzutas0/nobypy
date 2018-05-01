@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import codecs
+from singleton import SingletonType
 
 
 def messages(path):
@@ -21,6 +22,8 @@ def divided_by(rows, word):
 
 
 class Dictionary:
+    __metaclass__ = SingletonType
+    
     def __init__(self):
         directory = '../KOISURU_PROGRAM/sample/dictionary2/dics/'
         self.random = messages(directory + 'random.txt')
