@@ -18,6 +18,9 @@ class Emotion:
     def __init__(self):
         self.mood = 0
     
+    def clear(self):
+        self.mood = 0
+
     def adjust_mood(self, value):
         self.mood += value
         if self.mood > self.mood_max:

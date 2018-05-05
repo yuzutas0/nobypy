@@ -48,28 +48,45 @@ def now():
 def prompt(unmo):
     return f"{unmo.name}:{unmo.responder.name} > "
 
+def feeling():
+    mood = noby.emotion.mood
+    if -5 <= mood and mood <= 5:
+        return 'normal'
+    elif 5 < mood and mood <= 10:
+        return 'happy'
+    elif 10 < mood:
+        return 'more_happy'
+    elif -10 <= mood and mood < -5:
+        return 'angry'
+    elif mood < -10:
+        return 'more_angry'
+    return None
+
+def image_file_count(path):
+    count = 0
+    for name in os.listdir(path):
+        if(name[-4:] == '.bmp'):
+            count = count + 1
+    return count
+
 def draw_image(file_name):
     clear_output(wait=True)
     image_file = img_dir + file_name
     display(Image.open(image_file))
     sleep(0.1)
 
-def draw_wait_image():
-    draw_image('normal/0000.bmp')
+def draw_base_image():
+    feel = feeling()
+    path = images[feel]['base'] + '/0000.bmp'
+    draw_image(path)
 
 def draw_talk_image():
-    loop = 2
-    while loop > 0:
-        for num in range(2):
-            draw_image('talk/000' + str(num) + '.bmp')
-        loop -= 1
-    draw_wait_image()
-
-# TODO
-# BaseなのかTalkなのかだけ指定
-# 感情をもとにして対応ファイルの候補を出す
-# ファイル数をもとにループさせて0から順番に表示させる
-# TalkのときはBaseを表示する
+    feel = feeling()
+    path = images[feel]['talk']
+    count = image_file_count(img_dir + path)
+    for i in range(count):
+        draw_image(path + '/000' + str(i) + '.bmp')
+    draw_base_image()
 
 # TODO
 # 非同期で画像を表示したい（入力受付中にも画像を切り替えたい）
@@ -87,16 +104,17 @@ def initialize():
     log.append(text)
     log.append(now() + 'Unmo System prototype : proto')
     log.append(text)
-    draw_wait_image()
+    draw_base_image()
 
 def shutdown():
     log.append(text)
     log.append(now() + 'shutdown')
     log.append(text)    
-    draw_wait_image()
+    draw_base_image()
     for raw in reversed(log):
         print(raw)
     log.clear()
+    noby.emotion.clear()
 
 def logger(input_text):
     if input_text == '':
