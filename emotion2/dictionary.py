@@ -20,6 +20,14 @@ def covert_int(text):
         return int(text)
     return 0
 
+def is_suitable(need, mood):
+    if need == 0:
+        return True
+    if need > 0:
+        return mood > need
+    else:
+        return mood < need
+
 
 class PatternItem:
     separator = re.compile('^((-?\d+)##)?(.*)$')
@@ -37,15 +45,7 @@ class PatternItem:
             })
     
     def match(self, text):
-        return re.search(self.pattern, text) != None
-    
-    def is_suitable(self, need, mood):
-        if need == 0:
-            return True
-        if need > 0:
-            return mood > need
-        else:
-            return mood < need
+        return re.search(self.pattern, text)
     
     def choise(self, mood):
         choises = []
@@ -63,9 +63,9 @@ class Dictionary:
     def __init__(self):
         directory = '../KOISURU_PROGRAM/sample/emotion2/dics/'
         self.random = messages(directory + 'random.txt')
-        self.patterns = []
+        self.pattern = []
         rows = messages(directory + 'pattern.txt')
         for row in rows:
             divided = row.split('\t')
             item = PatternItem(divided[0], divided[1])
-            self.patterns.append(item)
+            self.pattern.append(item)

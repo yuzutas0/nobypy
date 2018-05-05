@@ -9,26 +9,6 @@ from dictionary import Dictionary
 
 dictionary = Dictionary()
 
-class Unmo:
-    def __init__(self, name):
-        self.name = name
-        self.responders = [
-            WhatResponder('What'),
-            RandomResponder('Random'),
-            PatternResponder('Pattern')
-        ]
-        self.responder = self.responders[0]
-    
-    def dialogue(self, input_text):
-        number = randint(9)
-        if number == 0:
-            self.responder = self.responders[0]
-        elif number >= 5:
-            self.responder = self.responders[2]
-        else:
-            self.responder = self.responders[1]
-        return self.responder.response(input_text)
-
 
 class Emotion:
     mood_min = -15
@@ -40,18 +20,42 @@ class Emotion:
     
     def adjust_mood(self, value):
         self.mood += value
-        if self.mood > mood_max:
-            self.mood = mood_max
-        elif self.mood < mood_min:
-            self.mood = mood_min
+        if self.mood > self.mood_max:
+            self.mood = self.mood_max
+        elif self.mood < self.mood_min:
+            self.mood = self.mood_min
     
     def update(self, input_text):
         for item in dictionary.pattern:
-            if re.search(item, input_text):
-                adjust_mood(item.modify)
+            if item.match(input_text):
+                self.adjust_mood(item.modify)
                 break
         
         if self.mood < 0:
-            self.mood += mood_recovery
+            self.mood += self.mood_recovery
         elif self.mood > 0:
-            self.mood -= mood_recovery
+            self.mood -= self.mood_recovery
+
+
+class Unmo:
+    def __init__(self, name):
+        self.name = name
+        self.emotion = Emotion()
+        self.responders = {
+            'what': WhatResponder('What'),
+            'random': RandomResponder('Random'),
+            'pattern': PatternResponder('Pattern')
+        }
+        self.responder = self.responders['pattern']
+    
+    def dialogue(self, input_text):
+        self.emotion.update(input_text)
+        number = randint(9)
+        if number == 0:
+            self.responder = self.responders['what']
+        elif number >= 5:
+            self.responder = self.responders['pattern']
+        else:
+            self.responder = self.responders['random']
+        return self.responder.response(input_text, self.emotion.mood)
+
