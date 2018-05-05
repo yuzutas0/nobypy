@@ -30,6 +30,14 @@ def draw_image(file_name):
 def draw_normal_image():
     draw_image('normal/0000.bmp')
 
+# TODO
+# キーワードをもとに該当フォルダ以下を探索
+# ファイル数をもとにループさせて0から順番に表示させる
+# どのキーワードが、どの感情のときなのか、だけ管理する
+
+# TODO
+# 非同期で画像を表示したい（入力受付中にも画像を切り替えたい）
+
 def draw_talk_image():
     loop = 2
     while loop > 0:
