@@ -15,23 +15,28 @@ text = '*******************************************************'
 log = []
 images = {
     'normal': {
-        'wait': ['normal', 'blink', 'lookaround'],
+        'base': 'normal',
+        'move': ['blink', 'lookaround'],
         'talk': 'talk'
     },
     'happy': {
-        'wait': ['happy', 'happy_blink', 'giggle'],
+        'base': 'happy',
+        'move': ['happy_blink', 'giggle'],
         'talk': 'happy_talk'
     },
     'more_happy': {
-        'wait': ['more_happy', 'more_happy_blink', 'blush'],
+        'base': 'more_happy',
+        'move': ['more_happy_blink', 'blush'],
         'talk': 'more_happy_talk'
     },
     'angry': {
-        'wait': ['angry', 'knock', 'sigh'],
+        'base': 'angry',
+        'move': ['knock', 'sigh'],
         'talk': 'angry_talk'
     },
     'more_angry': {
-        'wait': ['more_angry', 'snap', 'armfold'],
+        'base': 'more_angry',
+        'wait': ['snap', 'armfold'],
         'talk': 'more_angry_talk'
     }
 }
@@ -52,14 +57,6 @@ def draw_image(file_name):
 def draw_wait_image():
     draw_image('normal/0000.bmp')
 
-# TODO
-# キーワードをもとに該当フォルダ以下を探索
-# ファイル数をもとにループさせて0から順番に表示させる
-# WaitなのかTalkなのかだけ指定 -> 感情をもとにして対応ファイルの候補　-> Waitのときはランダムで1つを選ぶ
-
-# TODO
-# 非同期で画像を表示したい（入力受付中にも画像を切り替えたい）
-
 def draw_talk_image():
     loop = 2
     while loop > 0:
@@ -67,6 +64,17 @@ def draw_talk_image():
             draw_image('talk/000' + str(num) + '.bmp')
         loop -= 1
     draw_wait_image()
+
+# TODO
+# BaseなのかTalkなのかだけ指定
+# 感情をもとにして対応ファイルの候補を出す
+# ファイル数をもとにループさせて0から順番に表示させる
+# TalkのときはBaseを表示する
+
+# TODO
+# 非同期で画像を表示したい（入力受付中にも画像を切り替えたい）
+# Move になったり Baseになったり
+# Moveのときはランダムで1つ選ぶ
 
 def draw_text():
     tmp = []
