@@ -13,6 +13,28 @@ noby = Unmo('noby')
 img_dir = '../KOISURU_PROGRAM/sample/emotion2/bmps/'
 text = '*******************************************************'
 log = []
+images = {
+    'normal': {
+        'wait': ['normal', 'blink', 'lookaround'],
+        'talk': 'talk'
+    },
+    'happy': {
+        'wait': ['happy', 'happy_blink', 'giggle'],
+        'talk': 'happy_talk'
+    },
+    'more_happy': {
+        'wait': ['more_happy', 'more_happy_blink', 'blush'],
+        'talk': 'more_happy_talk'
+    },
+    'angry': {
+        'wait': ['angry', 'knock', 'sigh'],
+        'talk': 'angry_talk'
+    },
+    'more_angry': {
+        'wait': ['more_angry', 'snap', 'armfold'],
+        'talk': 'more_angry_talk'
+    }
+}
 
 
 def now():
@@ -27,13 +49,13 @@ def draw_image(file_name):
     display(Image.open(image_file))
     sleep(0.1)
 
-def draw_normal_image():
+def draw_wait_image():
     draw_image('normal/0000.bmp')
 
 # TODO
 # キーワードをもとに該当フォルダ以下を探索
 # ファイル数をもとにループさせて0から順番に表示させる
-# どのキーワードが、どの感情のときなのか、だけ管理する
+# WaitなのかTalkなのかだけ指定 -> 感情をもとにして対応ファイルの候補　-> Waitのときはランダムで1つを選ぶ
 
 # TODO
 # 非同期で画像を表示したい（入力受付中にも画像を切り替えたい）
@@ -44,7 +66,7 @@ def draw_talk_image():
         for num in range(2):
             draw_image('talk/000' + str(num) + '.bmp')
         loop -= 1
-    draw_normal_image()
+    draw_wait_image()
 
 def draw_text():
     tmp = []
@@ -57,13 +79,13 @@ def initialize():
     log.append(text)
     log.append(now() + 'Unmo System prototype : proto')
     log.append(text)
-    draw_normal_image()
+    draw_wait_image()
 
 def shutdown():
     log.append(text)
     log.append(now() + 'shutdown')
     log.append(text)    
-    draw_normal_image()
+    draw_wait_image()
     for raw in reversed(log):
         print(raw)
     log.clear()
