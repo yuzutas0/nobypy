@@ -75,17 +75,18 @@ def draw_image(file_name):
     display(Image.open(image_file))
     sleep(0.1)
 
-def draw_base_image():
+def draw_images(action):
     feel = feeling()
-    path = images[feel]['base'] + '/0000.bmp'
-    draw_image(path)
-
-def draw_talk_image():
-    feel = feeling()
-    path = images[feel]['talk']
+    path = images[feel][action]
     count = image_file_count(img_dir + path)
     for i in range(count):
         draw_image(path + '/000' + str(i) + '.bmp')
+
+def draw_base_image():
+    draw_images('base')
+
+def draw_talk_image():
+    draw_images('talk')
     draw_base_image()
 
 # TODO
@@ -120,7 +121,8 @@ def logger(input_text):
     if input_text == '':
         return False
     log.append(now() + 'you > ' + input_text)
-    log.append(now() + prompt(noby) + noby.dialogue(input_text))
+    response = noby.dialogue(input_text)
+    log.append(now() + prompt(noby) + response)
     return True
 
 def start():
