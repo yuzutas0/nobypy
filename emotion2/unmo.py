@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import random
 from numpy.random import *
 from responder import WhatResponder, RandomResponder, PatternResponder
 import re

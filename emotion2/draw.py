@@ -69,6 +69,16 @@ def image_file_count(path):
             count = count + 1
     return count
 
+def image_path(action):
+    feel = feeling()
+    info = images[feel][action]
+    path = ''
+    if isinstance(info, str):
+        path = info
+    if isinstance(info, list):
+        path = random.choice(info)
+    return path
+
 def draw_image(file_name):
     clear_output(wait=True)
     image_file = img_dir + file_name
@@ -76,8 +86,7 @@ def draw_image(file_name):
     sleep(0.1)
 
 def draw_images(action):
-    feel = feeling()
-    path = images[feel][action]
+    path = image_path(action)
     count = image_file_count(img_dir + path)
     for i in range(count):
         draw_image(path + '/000' + str(i) + '.bmp')
@@ -85,14 +94,16 @@ def draw_images(action):
 def draw_base_image():
     draw_images('base')
 
+def draw_move_image():
+    number = random.choice([0, 1, 2])
+    if number == 0:
+        draw_images('move')
+    draw_base_image()
+
 def draw_talk_image():
     draw_images('talk')
     draw_base_image()
-
-# TODO
-# 非同期で画像を表示したい（入力受付中にも画像を切り替えたい）
-# Move になったり Baseになったり
-# Moveのときはランダムで1つ選ぶ
+    draw_move_image()
 
 def draw_text():
     tmp = []
