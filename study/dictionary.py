@@ -2,6 +2,8 @@
 
 import codecs
 import re
+import os
+import shutil
 import random
 from singleton import SingletonType
 
@@ -61,8 +63,13 @@ class Dictionary:
     __metaclass__ = SingletonType
     
     def __init__(self):
-        directory = '../KOISURU_PROGRAM/sample/emotion2/dics/'
-        self.random = messages(directory + 'random.txt')
+        # random
+        dictionary = './random.txt'
+        directory = '../KOISURU_PROGRAM/sample/study/dics/'
+        if not os.path.isfile(dictionary):
+            shutil.copyfile(directory + 'random.txt', dictionary)
+        self.random = messages(dictionary)
+        # pattern
         self.pattern = []
         rows = messages(directory + 'pattern.txt')
         for row in rows:

@@ -10,7 +10,7 @@ from time import sleep
 
 
 noby = Unmo('noby')
-img_dir = '../KOISURU_PROGRAM/sample/emotion2/bmps/'
+img_dir = '../KOISURU_PROGRAM/sample/study/bmps/'
 text = '*******************************************************'
 log = []
 images = {
