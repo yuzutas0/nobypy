@@ -5,13 +5,12 @@ import re
 import os
 import shutil
 import random
-import pickle
 from singleton import SingletonType
 
 
 def messages(path):
     results = []
-    content = codecs.open(path, "r", "shift_jis")
+    content = codecs.open(path, 'r', 'shift_jis')
     for row in content:
         if row.rstrip() != '':
             results.append(row.rstrip())
@@ -84,5 +83,7 @@ class Dictionary:
             self.random.append(input_text)
 
     def save(self):
-        f = open(self.dictionary_file, 'w')
-        pickle.dump(self.random, f)
+        content = codecs.open(self.dictionary_file, 'w', 'shift_jis')
+        for x in self.random:
+            content.write(x + "\n")
+        content.close()

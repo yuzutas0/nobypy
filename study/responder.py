@@ -33,4 +33,4 @@ class PatternResponder(Responder):
                 resp = item.choise(mood)
                 if resp != None:
                     return resp.replace('%match%', m.group(0))
-        return random.choice(dictionary.random)
+        return random.choice(self.dictionary.random)

@@ -38,8 +38,6 @@ class Emotion:
 
 
 class Unmo:
-    dictionary = Dictionary()
-
     def __init__(self, name):
         self.name = name
         self.emotion = Emotion()
@@ -64,3 +62,6 @@ class Unmo:
 
         RandomResponder.dictionary.study(input_text)
         return response
+
+    def save(self):
+        RandomResponder.dictionary.save()

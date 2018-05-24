@@ -118,6 +118,14 @@ def initialize():
     log.append(text)
     draw_base_image()
 
+def save_log():
+    f = open('./log.txt', 'a')
+    for i in range(5):
+        f.write("\n")
+    for x in log:
+        f.write(x + "\n")
+    f.close()
+
 def shutdown():
     log.append(text)
     log.append(now() + 'shutdown')
@@ -125,8 +133,10 @@ def shutdown():
     draw_base_image()
     for raw in reversed(log):
         print(raw)
+    save_log()
     log.clear()
     noby.emotion.clear()
+    noby.save()
 
 def logger(input_text):
     if input_text == '':
