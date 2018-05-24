@@ -6,13 +6,11 @@ import re
 from dictionary import Dictionary
 
 
-dictionary = Dictionary()
-
-
 class Emotion:
     mood_min = -15
     mood_max = 15
     mood_recovery = 0.5
+    dictionary = Dictionary()
     
     def __init__(self):
         self.mood = 0
@@ -28,7 +26,7 @@ class Emotion:
             self.mood = self.mood_min
     
     def update(self, input_text):
-        for item in dictionary.pattern:
+        for item in self.dictionary.pattern:
             if item.match(input_text):
                 self.adjust_mood(item.modify)
                 break
@@ -40,6 +38,8 @@ class Emotion:
 
 
 class Unmo:
+    dictionary = Dictionary()
+
     def __init__(self, name):
         self.name = name
         self.emotion = Emotion()
@@ -49,9 +49,10 @@ class Unmo:
             'pattern': PatternResponder('Pattern')
         }
         self.responder = self.responders['pattern']
-    
+
     def dialogue(self, input_text):
         self.emotion.update(input_text)
+
         number = randint(9)
         if number == 0:
             self.responder = self.responders['what']
@@ -59,5 +60,7 @@ class Unmo:
             self.responder = self.responders['pattern']
         else:
             self.responder = self.responders['random']
-        return self.responder.response(input_text, self.emotion.mood)
+        response = self.responder.response(input_text, self.emotion.mood)
 
+        RandomResponder.dictionary.study(input_text)
+        return response

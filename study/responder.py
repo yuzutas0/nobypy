@@ -5,10 +5,9 @@ import re
 from dictionary import Dictionary
 
 
-dictionary = Dictionary()
-
-
 class Responder:
+    dictionary = Dictionary()
+
     def __init__(self, name):
         self.name = name
     
@@ -23,12 +22,12 @@ class WhatResponder(Responder):
 
 class RandomResponder(Responder):
     def response(self, input_text, mood):
-        return random.choice(dictionary.random)
+        return random.choice(self.dictionary.random)
 
 
 class PatternResponder(Responder):
     def response(self, input_text, mood):
-        for item in dictionary.pattern:
+        for item in self.dictionary.pattern:
             m = item.match(input_text)
             if m:
                 resp = item.choise(mood)

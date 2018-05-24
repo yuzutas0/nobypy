@@ -5,6 +5,7 @@ import re
 import os
 import shutil
 import random
+import pickle
 from singleton import SingletonType
 
 
@@ -61,14 +62,15 @@ class PatternItem:
 
 class Dictionary:
     __metaclass__ = SingletonType
-    
+
+    dictionary_file = './random.txt'
+
     def __init__(self):
         # random
-        dictionary = './random.txt'
         directory = '../KOISURU_PROGRAM/sample/study/dics/'
-        if not os.path.isfile(dictionary):
-            shutil.copyfile(directory + 'random.txt', dictionary)
-        self.random = messages(dictionary)
+        if not os.path.isfile(self.dictionary_file):
+            shutil.copyfile(directory + 'random.txt', self.dictionary_file)
+        self.random = messages(self.dictionary_file)
         # pattern
         self.pattern = []
         rows = messages(directory + 'pattern.txt')
@@ -76,3 +78,11 @@ class Dictionary:
             divided = row.split('\t')
             item = PatternItem(divided[0], divided[1])
             self.pattern.append(item)
+
+    def study(self, input_text):
+        if not input_text in self.random:
+            self.random.append(input_text)
+
+    def save(self):
+        f = open(self.dictionary_file, 'w')
+        pickle.dump(self.random, f)
