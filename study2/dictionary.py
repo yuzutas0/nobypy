@@ -66,7 +66,7 @@ class Dictionary:
 
     def __init__(self):
         # random
-        directory = '../KOISURU_PROGRAM/sample/study/dics/'
+        directory = '../KOISURU_PROGRAM/sample/study2/dics/'
         if not os.path.isfile(self.dictionary_file):
             shutil.copyfile(directory + 'random.txt', self.dictionary_file)
         self.random = messages(self.dictionary_file)
