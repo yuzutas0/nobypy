@@ -91,20 +91,25 @@ class Dictionary:
         if not input_text in self.random:
             self.random.append(input_text)
 
-    def find_pattern(self, word):
+    def find_pattern(self, word, input_text):
         for item in self.pattern:
-            if word == item.pattern:
-                return item
+            if re.match(word, item.pattern) == None:
+                continue
+            for phrase in item.phrases:
+                if phrase['phrase'] == input_text:
+                    break
+                if phrase == item.phrases[-1]:
+                    return item
         return None
 
     def study_pattern(self, input_text, tokens):
         for token in tokens:
             if not Morph.is_keyword(token):
-                next
+                continue
             word = token.surface
-            duped = self.find_pattern(word)
+            duped = self.find_pattern(word, input_text)
             if duped != None:
-                duped.phrases.append({'need': 0, 'phrase': word})
+                duped.phrases.append({'need': 0, 'phrase': input_text})
             else:
                 self.pattern.append(PatternItem(word, '0##' + input_text))
 
@@ -113,4 +118,14 @@ class Dictionary:
         content = codecs.open(self.random_file, 'w', 'shift_jis')
         for x in self.random:
             content.write(x + "\n")
+        content.close()
+
+        # pattern
+        content = codecs.open(self.pattern_file, 'w', 'shift_jis')
+        for x in self.pattern:
+            phrase = ''
+            for y in x.phrases:
+                phrase = phrase + str(y['need']) + '##' + y['phrase'] + '|'
+            phrase = phrase[:-1]
+            content.write(str(x.modify) + '##' + x.pattern + '\t' + phrase + '\n')
         content.close()
