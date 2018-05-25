@@ -2,6 +2,7 @@
 
 from numpy.random import *
 from responder import WhatResponder, RandomResponder, PatternResponder
+from morph import Morph
 import re
 from dictionary import Dictionary
 
@@ -50,6 +51,7 @@ class Unmo:
 
     def dialogue(self, input_text):
         self.emotion.update(input_text)
+        tokens = Morph.analyze(input_text)
 
         number = randint(9)
         if number == 0:
@@ -60,7 +62,7 @@ class Unmo:
             self.responder = self.responders['random']
         response = self.responder.response(input_text, self.emotion.mood)
 
-        RandomResponder.dictionary.study(input_text)
+        RandomResponder.dictionary.study(input_text, tokens)
         return response
 
     def save(self):
