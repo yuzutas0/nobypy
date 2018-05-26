@@ -46,6 +46,7 @@ class TemplateResponder(Responder):
         count = len(keywords)
         if count > 0 and count in self.dictionary.template.keys():
             template = random.choice(self.dictionary.template[count])
-            template = template.replace('%noun%', '%s')
-            return template % keywords
+            for keyword in keywords:
+                template = template.replace('%noun%', keyword, 1)
+            return template
         return random.choice(self.dictionary.random)
