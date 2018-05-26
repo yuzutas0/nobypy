@@ -11,6 +11,13 @@ Nobypy: No Brain by Python
 - Download from https://book.mynavi.jp/support/pc/5346/
 - Direct Link is https://book.mynavi.jp/support/pc/5346/KOISURU_PROGRAM.zip
 
+# Read Shift-JIS Files
+
+```
+# e.g.
+$ iconv -f SJIS ./study3/template.txt
+```
+
 # Images
 
 - https://www.irasutoya.com/2015/05/ai.html
