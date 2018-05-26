@@ -101,6 +101,7 @@ class Dictionary:
     def study(self, input_text, tokens):
         self.study_random(input_text)
         self.study_pattern(input_text, tokens)
+        self.study_template(tokens)
 
     def study_random(self, input_text):
         if not input_text in self.random:
@@ -127,6 +128,22 @@ class Dictionary:
                 duped.phrases.append({'need': 0, 'phrase': input_text})
             else:
                 self.pattern.append(PatternItem(word, '0##' + input_text))
+
+    def study_template(self, tokens):
+        template = ''
+        count = 0
+        for token in tokens:
+            word = token.surface
+            if Morph.is_keyword(token):
+                word = '%noun%'
+                count += 1
+            template += word
+        if count == 0:
+            return
+        if not count in self.template.keys():
+            self.template[count] = []
+        if not template in self.template[count]:
+            self.template[count].append(template)
 
     def save(self):
         # random
