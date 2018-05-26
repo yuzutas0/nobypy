@@ -66,6 +66,7 @@ class Dictionary:
     original_directory = '../KOISURU_PROGRAM/sample/study3/dics/'
     random_file = './random.txt'
     pattern_file = './pattern.txt'
+    template_file = './template.txt'
 
     def __init__(self):
         # random
@@ -82,6 +83,20 @@ class Dictionary:
             divided = row.split('\t')
             item = PatternItem(divided[0], divided[1])
             self.pattern.append(item)
+
+        # template
+        if not os.path.isfile(self.template_file):
+            shutil.copyfile(self.original_directory + 'template.txt', self.template_file)
+        self.template = {}
+        rows = messages(self.template_file)
+        for row in rows:
+            divided = row.split('\t')
+            if divided[0] == None:
+                continue
+            count = int(divided[0])
+            if not count in self.template.keys():
+                self.template[count] = []
+            self.template[count].append(divided[1])
 
     def study(self, input_text, tokens):
         self.study_random(input_text)
