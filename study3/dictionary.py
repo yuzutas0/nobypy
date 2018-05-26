@@ -161,3 +161,10 @@ class Dictionary:
             phrase = phrase[:-1]
             content.write(str(x.modify) + '##' + x.pattern + '\t' + phrase + '\n')
         content.close()
+
+        # template
+        content = codecs.open(self.template_file, 'w', 'shift_jis')
+        for count in self.template.keys():
+            for template in self.template[count]:
+                content.write(str(count) + '\t' + template + "\n")
+        content.close()
