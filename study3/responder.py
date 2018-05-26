@@ -17,17 +17,17 @@ class Responder:
 
 
 class WhatResponder(Responder):
-    def response(self, input_text, mood):
+    def response(self, input_text='', tokens=[], mood=0):
             return f"{input_text}ってなに？"
 
 
 class RandomResponder(Responder):
-    def response(self, input_text, mood):
+    def response(self, input_text='', tokens=[], mood=0):
         return random.choice(self.dictionary.random)
 
 
 class PatternResponder(Responder):
-    def response(self, input_text, mood):
+    def response(self, input_text='', tokens=[], mood=0):
         for item in self.dictionary.pattern:
             m = item.match(input_text)
             if m:
@@ -38,7 +38,7 @@ class PatternResponder(Responder):
 
 
 class TemplateResponder(Responder):
-    def response(self, input_text, tokens, mood):
+    def response(self, input_text='', tokens=[], mood=0):
         keywords = []
         for token in tokens:
             if Morph.is_keyword(token):
