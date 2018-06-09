@@ -18,6 +18,13 @@ Nobypy: No Brain by Python
 $ iconv -f SJIS ./study3/template.txt
 ```
 
+# Copy Directory
+
+```
+$ copy -r ./study3 ./markov
+$ LC_ALL=C find ./markov -name '*.py' | xargs sed -i "" 's/study3/markov/g'
+```
+
 # Images
 
 - https://www.irasutoya.com/2015/05/ai.html
