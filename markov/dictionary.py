@@ -6,7 +6,6 @@ import os
 import shutil
 import random
 from singleton import SingletonType
-from morph import Morph
 
 
 def messages(path):
