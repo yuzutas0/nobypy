@@ -34,5 +34,32 @@ class TestMarkov(unittest.TestCase):
         self.assertTrue(len(self.markov.starts) > 0)
         self.assertTrue(len(self.markov.dic) > 0)
 
+    def test_generate(self):
+        input_texts = [
+            '初めまして、坊ちゃん',
+            'あら、ご病気ですか',
+            'あらあら、大変ですね',
+            'いたずらして病気になっちゃったんですか？',
+            'そんな威張らなくてもいいでしょう',
+            'はあ、そんなもんですか',
+            '遅刻しちゃだめですね',
+            'よく覚えてないんですか？',
+            'ターナー？',
+            'どなたですか？'
+        ]
+        
+        for input_text in input_texts:
+            with self.subTest():
+                tokens = Morph.analyze(input_text)
+                keyword = 'N/A'
+                for token in tokens:
+                    if Morph.is_keyword(token):
+                        keyword = token.surface
+                generated = self.markov.generate(keyword)
+                print('**********')
+                print('you > ' + input_text)
+                print('generated > ' + generated)
+                self.assertTrue(len(generated) > 0)
+
 if __name__ == "__main__":
     unittest.main()
