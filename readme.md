@@ -25,6 +25,12 @@ $ copy -r ./study3 ./markov
 $ LC_ALL=C find ./markov -name '*.py' | xargs sed -i "" 's/study3/markov/g'
 ```
 
+# Execute Test
+
+```
+$ python -m unittest ./markov/test_markov.py
+```
+
 # Images
 
 - https://www.irasutoya.com/2015/05/ai.html
