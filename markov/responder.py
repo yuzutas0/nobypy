@@ -50,3 +50,13 @@ class TemplateResponder(Responder):
                 template = template.replace('%noun%', keyword, 1)
             return template
         return random.choice(self.dictionary.random)
+
+
+class MarkovResponder(Responder):
+    def response(self, input_text='', tokens=[], mood=0):
+        keyword = ''
+        for token in tokens:
+            if Morph.is_keyword(token):
+                keyword = token.surface
+        generated = self.markov.generate(keyword)
+        return generated if ((generated is not None) and (len(generated) > 0)) else random.choice(self.dictionary.random)
