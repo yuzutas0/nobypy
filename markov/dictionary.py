@@ -71,15 +71,17 @@ class Dictionary:
         self.__load_random()
         self.__load_pattern()
         self.__load_template()
+    
+    def __load_file(self, original_file, use_file):
+        if not os.path.isfile(use_file):
+            shutil.copyfile(original_file, use_file)
 
     def __load_random(self):
-        if not os.path.isfile(self.random_file):
-            shutil.copyfile(self.original_directory + 'random.txt', self.random_file)
+        self.__load_file(self.original_directory + 'random.txt', self.random_file)
         self.random = messages(self.random_file)
 
     def __load_pattern(self):
-        if not os.path.isfile(self.pattern_file):
-            shutil.copyfile(self.original_directory + 'pattern.txt', self.pattern_file)
+        self.__load_file(self.original_directory + 'pattern.txt', self.pattern_file)
         self.pattern = []
         rows = messages(self.pattern_file)
         for row in rows:
@@ -88,8 +90,7 @@ class Dictionary:
             self.pattern.append(item)
 
     def __load_template(self):
-        if not os.path.isfile(self.template_file):
-            shutil.copyfile(self.original_directory + 'template.txt', self.template_file)
+        self.__load_file(self.original_directory + 'template.txt', self.template_file)
         self.template = {}
         rows = messages(self.template_file)
         for row in rows:
