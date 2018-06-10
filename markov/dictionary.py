@@ -68,12 +68,16 @@ class Dictionary:
     template_file = './template.txt'
 
     def __init__(self):
-        # random
+        self.__load_random()
+        self.__load_pattern()
+        self.__load_template()
+
+    def __load_random(self):
         if not os.path.isfile(self.random_file):
             shutil.copyfile(self.original_directory + 'random.txt', self.random_file)
         self.random = messages(self.random_file)
 
-        # pattern
+    def __load_pattern(self):
         if not os.path.isfile(self.pattern_file):
             shutil.copyfile(self.original_directory + 'pattern.txt', self.pattern_file)
         self.pattern = []
@@ -83,7 +87,7 @@ class Dictionary:
             item = PatternItem(divided[0], divided[1])
             self.pattern.append(item)
 
-        # template
+    def __load_template(self):
         if not os.path.isfile(self.template_file):
             shutil.copyfile(self.original_directory + 'template.txt', self.template_file)
         self.template = {}
