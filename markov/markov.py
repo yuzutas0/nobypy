@@ -20,6 +20,8 @@ class Markov:
         parts = copy.deepcopy(parts)
         point = 0
         for part in parts:
+            if part.surface == '' or part.surface is None:
+                continue
             parts[point] = part.surface
             point += 1
         
@@ -35,13 +37,12 @@ class Markov:
         self.__add_suffix(prefix1, prefix2, self.end_mark)
     
     def generate(self, keyword):
-        print(self.dic)
         if len(self.dic) == 0:
             return None
         words = []
         
-        prefix1 = keyword if keyword in self.dic.keys() else self.__select_start()
-        prefix2 = random.choice(self.dic[prefix1].keys())
+        prefix1 = keyword if (keyword in self.dic.keys()) else self.__select_start()
+        prefix2 = random.choice(list(self.dic[prefix1].keys()))
         words.extend([prefix1, prefix2])
         
         for x in range(self.chain_max):
@@ -82,4 +83,4 @@ class Markov:
         self.starts[prefix1] += 1
 
     def __select_start(self):
-        random.choice(self.starts.keys())
+        return random.choice(list(self.starts.keys()))
