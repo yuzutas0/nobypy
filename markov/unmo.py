@@ -46,7 +46,8 @@ class Unmo:
             'what': WhatResponder('What'),
             'random': RandomResponder('Random'),
             'pattern': PatternResponder('Pattern'),
-            'template': TemplateResponder('Template')
+            'template': TemplateResponder('Template'),
+            'markov': MarkovResponder('Markov')
         }
         self.responder = self.responders['pattern']
 
@@ -57,10 +58,12 @@ class Unmo:
         number = randint(10)
         if number == 0:
             self.responder = self.responders['what']
-        elif number >= 6:
+        elif number <= 3:
             self.responder = self.responders['pattern']
-        elif number >= 3:
+        elif number <= 5:
             self.responder = self.responders['template']
+        elif number <= 7:
+            self.responder = self.responders['markov']
         else:
             self.responder = self.responders['random']
         response = self.responder.response(input_text, tokens, self.emotion.mood)
