@@ -55,19 +55,25 @@ class Markov:
         
         return ''.join(words)
     
-    # TODO: filenameが同じなのは不自然?
-    def load(self, f):
-        # f = open(filename,'rb')
+    def load(self, dic_file, starts_file):
+        # dic
+        f = open(dic_file, 'rb')
         self.dic = pickle.load(f)
+        f.close()
+        # starts
+        f = open(starts_file, 'rb')
         self.starts = pickle.load(f)
-        # f.close()
+        f.close()
 
-    # TODO: filenameが同じなのは不自然?
-    def save(self, f):
-        # f = open(filename,'wb')
+    def save(self, dic_file, starts_file):
+        # dic
+        f = open(dic_file, 'wb')
         pickle.dump(self.dic, f)
+        f.close
+        # starts
+        f = open(starts_file, 'wb')
         pickle.dump(self.starts, f)
-        # f.close
+        f.close
 
     # private method
     def __add_suffix(self, prefix1, prefix2, suffix):

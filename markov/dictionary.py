@@ -6,6 +6,7 @@ import os
 import shutil
 import random
 from singleton import SingletonType
+from markov import Markov
 
 
 def messages(path):
@@ -66,6 +67,10 @@ class Dictionary:
     random_file = './random.txt'
     pattern_file = './pattern.txt'
     template_file = './template.txt'
+    markov_files = [
+        './markov_dic.pkl',
+        './markov_starts.pkl'
+    ]
 
     def __init__(self):
         self.__load_random()
@@ -104,7 +109,8 @@ class Dictionary:
             self.template[count].append(divided[1])
 
     def __load_markov(self):
-        # TODO: implement
+        self.markov = Markov()
+        self.markov.load(markov_files[0], markov_files[1])
 
     def study(self, input_text, tokens):
         self.study_random(input_text)
@@ -155,7 +161,7 @@ class Dictionary:
             self.template[count].append(template)
 
     def study_markov(self, tokens):
-        # TODO: implement
+        self.markov.add_sentence(tokens)
 
     def save(self):
         # random
@@ -181,5 +187,4 @@ class Dictionary:
                 content.write(str(count) + '\t' + template + "\n")
         content.close()
         
-        # markov
-        # TODO: implement
+        self.markov.save(markov_files[0], markov_files[1])
