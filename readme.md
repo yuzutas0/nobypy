@@ -28,7 +28,7 @@ $ LC_ALL=C find ./markov -name '*.py' | xargs sed -i "" 's/study3/markov/g'
 # Execute Test
 
 ```
-$ python -m unittest ./markov/test_markov.py
+$ cd ./markov & python test_markov.py -v && cd ..
 ```
 
 # Images
