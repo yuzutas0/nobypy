@@ -18,6 +18,11 @@ class Markov:
             return
         
         parts = copy.deepcopy(parts)
+        point = 0
+        for part in parts:
+            parts[point] = part.surface
+            point += 1
+        
         prefix1 = parts.pop(0)
         prefix2 = parts.pop(0)
         self.__add_start(prefix1)
@@ -27,9 +32,10 @@ class Markov:
             prefix1 = prefix2
             prefix2 = suffix
         
-        __add_suffix(prefix1, prefix2, self.end_mark)
+        self.__add_suffix(prefix1, prefix2, self.end_mark)
     
     def generate(self, keyword):
+        print(self.dic)
         if len(self.dic) == 0:
             return None
         words = []

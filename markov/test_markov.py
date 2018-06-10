@@ -27,9 +27,9 @@ class TestMarkov(unittest.TestCase):
         for text in texts:
             if text == '':
                 continue
-            tokens = Morph.analyze(input_text)
+            tokens = Morph.analyze(text)
             self.markov.add_sentence(tokens)
-            print('.')
+            print('.', end='')
 
         self.assertTrue(len(self.markov.starts) > 0)
         self.assertTrue(len(self.markov.dic) > 0)
