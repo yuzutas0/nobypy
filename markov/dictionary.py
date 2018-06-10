@@ -71,6 +71,7 @@ class Dictionary:
         self.__load_random()
         self.__load_pattern()
         self.__load_template()
+        self.__load_markov()
     
     def __load_file(self, original_file, use_file):
         if not os.path.isfile(use_file):
@@ -102,10 +103,14 @@ class Dictionary:
                 self.template[count] = []
             self.template[count].append(divided[1])
 
+    def __load_markov(self):
+        # TODO: implement
+
     def study(self, input_text, tokens):
         self.study_random(input_text)
         self.study_pattern(input_text, tokens)
         self.study_template(tokens)
+        self.study_markov(tokens)
 
     def study_random(self, input_text):
         if not input_text in self.random:
@@ -149,6 +154,9 @@ class Dictionary:
         if not template in self.template[count]:
             self.template[count].append(template)
 
+    def study_markov(self, tokens):
+        # TODO: implement
+
     def save(self):
         # random
         content = codecs.open(self.random_file, 'w', 'shift_jis')
@@ -172,3 +180,6 @@ class Dictionary:
             for template in self.template[count]:
                 content.write(str(count) + '\t' + template + "\n")
         content.close()
+        
+        # markov
+        # TODO: implement
