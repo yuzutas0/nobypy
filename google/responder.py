@@ -69,9 +69,11 @@ class SearchResponder(Responder):
             for token in tokens:
                 if Morph.is_keyword(token):
                     keyword += token.surface + ' '
-
-            sentence = Search.get_sentence(keyword)
-            self.dictionary.study_markov(sentence)
-            return sentence
+            
+            if len(keyword) > 0:
+                sentence = Search.get_sentence(keyword)
+                self.dictionary.study_markov(sentence)
+                return sentence
         except:
-            return random.choice(self.dictionary.random)
+            print('*** error ***')
+        return random.choice(self.dictionary.random)
