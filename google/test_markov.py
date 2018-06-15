@@ -49,7 +49,7 @@ class TestMarkov(unittest.TestCase):
 
     # private method
     def __add_sentense_bocchan(self):
-        sample_file = '../KOISURU_PROGRAM/sample/google/bocchan.txt'
+        sample_file = '../KOISURU_PROGRAM/sample/markov/bocchan.txt'
         content = ''
         
         original_content = codecs.open(sample_file, 'r', 'shift_jis')
