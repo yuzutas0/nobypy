@@ -21,7 +21,7 @@ $ iconv -f SJIS ./study3/template.txt
 # Copy Directory
 
 ```
-$ copy -r ./study3 ./markov
+$ cp -r ./study3 ./markov
 $ LC_ALL=C find ./markov -name '*.py' | xargs sed -i "" 's/study3/markov/g'
 ```
 
