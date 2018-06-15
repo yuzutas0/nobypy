@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from numpy.random import *
-from responder import WhatResponder, RandomResponder, PatternResponder, TemplateResponder, MarkovResponder
+from responder import WhatResponder, RandomResponder, PatternResponder, TemplateResponder, MarkovResponder, SearchResponder
 from morph import Morph
 import re
 from dictionary import Dictionary
@@ -47,7 +47,8 @@ class Unmo:
             'random': RandomResponder('Random'),
             'pattern': PatternResponder('Pattern'),
             'template': TemplateResponder('Template'),
-            'markov': MarkovResponder('Markov')
+            'markov': MarkovResponder('Markov'),
+            'search': SearchResponder('Search')
         }
         self.responder = self.responders['pattern']
 
@@ -55,15 +56,17 @@ class Unmo:
         self.emotion.update(input_text)
         tokens = Morph.analyze(input_text)
 
-        number = randint(10)
+        number = randint(20)
         if number == 0:
             self.responder = self.responders['what']
-        elif number <= 3:
-            self.responder = self.responders['pattern']
         elif number <= 5:
+            self.responder = self.responders['pattern']
+        elif number <= 9:
             self.responder = self.responders['template']
-        elif number <= 7:
+        elif number <= 13:
             self.responder = self.responders['markov']
+        elif number <= 17:
+            self.responder = self.responders['search']
         else:
             self.responder = self.responders['random']
         response = self.responder.response(input_text, tokens, self.emotion.mood)
