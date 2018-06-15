@@ -36,7 +36,7 @@ images = {
     },
     'more_angry': {
         'base': 'more_angry',
-        'wait': ['snap', 'armfold'],
+        'move': ['snap', 'armfold'],
         'talk': 'more_angry_talk'
     }
 }
