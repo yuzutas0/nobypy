@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from numpy.random import *
-from responder import WhatResponder, RandomResponder, PatternResponder, TemplateResponder
+from responder import WhatResponder, RandomResponder, PatternResponder, TemplateResponder, MarkovResponder
 from morph import Morph
 import re
 from dictionary import Dictionary

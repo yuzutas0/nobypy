@@ -7,6 +7,7 @@ import shutil
 import random
 from singleton import SingletonType
 from markov import Markov
+from morph import Morph
 
 
 def messages(path):
@@ -110,7 +111,7 @@ class Dictionary:
 
     def __load_markov(self):
         self.markov = Markov()
-        self.markov.load(markov_files[0], markov_files[1])
+        self.markov.load(self.markov_files[0], self.markov_files[1])
 
     def study(self, input_text, tokens):
         self.study_random(input_text)
@@ -187,4 +188,5 @@ class Dictionary:
                 content.write(str(count) + '\t' + template + "\n")
         content.close()
         
-        self.markov.save(markov_files[0], markov_files[1])
+        # markov
+        self.markov.save(self.markov_files[0], self.markov_files[1])

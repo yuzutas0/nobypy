@@ -56,14 +56,17 @@ class Markov:
         return ''.join(words)
     
     def load(self, dic_file, starts_file):
-        # dic
-        f = open(dic_file, 'rb')
-        self.dic = pickle.load(f)
-        f.close()
-        # starts
-        f = open(starts_file, 'rb')
-        self.starts = pickle.load(f)
-        f.close()
+        try:
+            # dic
+            f = open(dic_file, 'rb')
+            self.dic = pickle.load(f)
+            f.close()
+            # starts
+            f = open(starts_file, 'rb')
+            self.starts = pickle.load(f)
+            f.close()
+        except FileNotFoundError:
+            print('*** File Not Fount ***')
 
     def save(self, dic_file, starts_file):
         # dic

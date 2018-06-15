@@ -58,5 +58,5 @@ class MarkovResponder(Responder):
         for token in tokens:
             if Morph.is_keyword(token):
                 keyword = token.surface
-        generated = self.markov.generate(keyword)
+        generated = self.dictionary.markov.generate(keyword)
         return generated if ((generated is not None) and (len(generated) > 0)) else random.choice(self.dictionary.random)
