@@ -10,7 +10,7 @@ from time import sleep
 
 
 noby = Unmo('noby')
-img_dir = '../KOISURU_PROGRAM/sample/markov/bmps/'
+img_dir = '../KOISURU_PROGRAM/sample/google/bmps/'
 text = '*******************************************************'
 log = []
 images = {

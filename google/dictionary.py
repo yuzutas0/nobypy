@@ -64,7 +64,7 @@ class PatternItem:
 class Dictionary:
     __metaclass__ = SingletonType
 
-    original_directory = '../KOISURU_PROGRAM/sample/markov/dics/'
+    original_directory = '../KOISURU_PROGRAM/sample/google/dics/'
     random_file = './random.txt'
     pattern_file = './pattern.txt'
     template_file = './template.txt'
