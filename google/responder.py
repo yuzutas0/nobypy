@@ -60,3 +60,18 @@ class MarkovResponder(Responder):
                 keyword = token.surface
         generated = self.dictionary.markov.generate(keyword)
         return generated if ((generated is not None) and (len(generated) > 0)) else random.choice(self.dictionary.random)
+
+
+class SearchResponder(Responder):
+    def response(self, input_text='', tokens=[], mood=0):
+        try:
+            keyword = ''
+            for token in tokens:
+                if Morph.is_keyword(token):
+                    keyword += token.surface + ' '
+
+            sentence = Search.get_sentence(keyword)
+            self.dictionary.study_markov(sentence)
+            return sentence
+        except:
+            return random.choice(self.dictionary.random)
